@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Counter = () => {
+const EffectEx = () => {
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
 
   const onChangeName = (e) => {
     setName(e.target.value);
   };
+
   const onChangeNickname = (e) => {
     setNickname(e.target.value);
   };
 
   useEffect(() => {
-    console.log("랜더링 완료");
-    console.log({
-      name,
-      nickname,
-    });
-  });
+    console.log("effect");
+    console.log(name);
+    return () => {
+      console.log("cleanup");
+      console.log(name);
+    };
+  }, [name]);
+
   return (
     <>
       <div>
@@ -28,4 +31,4 @@ const Counter = () => {
   );
 };
 
-export default Counter;
+export default EffectEx;
